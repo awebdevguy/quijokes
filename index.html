@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joke Robot</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="select-container">
+      <select id="select-voice" class="select-voice" placeholder="Choose Voice"></select>
+    </div>
+    <div class="container">
+      <button id="button">Tell Me A Joke</button>
+      <audio id="audio" controls hidden></audio>
+    </div>
+    <div class="joke-container" id="joke-container">
+      <p class="text-area" id="text-area"></p>
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/7.24.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <!-- Script -->
+    <script src="script.js"></script>
+  </body>
+</html>
