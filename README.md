@@ -2,4 +2,6 @@
 
 https://quijoke.web.app/
 
-Random cheesy jokes.
+A web app with a robot that tells random tacky jokes.
+
+It uses the system's voice synthesis.
