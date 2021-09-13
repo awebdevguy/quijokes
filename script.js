@@ -1,11 +1,11 @@
 const button = document.getElementById("button");
 const proxyURL = "https://quicors.herokuapp.com/";
 // Joke api, this one uses setup: && delivery: else just joke:
-// const url = "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,racist,sexist";
+const url = proxyURL + "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,racist,sexist";
 // const url = "https://sv443.net/jokeapi/v2/joke/Any";
 
 // Another joke api, uses setup: and punchline:
-const url = proxyURL + "https://official-joke-api.appspot.com/random_joke";
+// const url = proxyURL + "https://official-joke-api.appspot.com/random_joke";
 const selector = document.getElementById("select-voice");
 const textArea = document.getElementById("text-area");
 var voices = [];
@@ -59,10 +59,10 @@ async function getJokes() {
     const data = await response.json();
     if (data.setup) {
       // for const url = "https://official-joke-api.appspot.com/random_joke";
-      joke = `${data.setup} ... ${data.punchline}`;
+    //   joke = `${data.setup} ... ${data.punchline}`;
 
       // for const url = "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,racist,sexist";
-      // joke = `${data.setup} ... ${data.delivery}`;
+      joke = `${data.setup} ... ${data.delivery}`;
     } else {
       joke = data.joke;
     }
