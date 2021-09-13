@@ -1,10 +1,11 @@
 const button = document.getElementById("button");
+const proxyURL = "https://quicors.herokuapp.com/";
 // Joke api, this one uses setup: && delivery: else just joke:
 // const url = "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,racist,sexist";
 // const url = "https://sv443.net/jokeapi/v2/joke/Any";
 
 // Another joke api, uses setup: and punchline:
-const url = "https://official-joke-api.appspot.com/random_joke";
+const url = proxyURL + "https://official-joke-api.appspot.com/random_joke";
 const selector = document.getElementById("select-voice");
 const textArea = document.getElementById("text-area");
 var voices = [];
