@@ -1,7 +1,6 @@
 # QUIJOKES
 
-https://quijoke.web.app/
-
+https://awebdevguy.github.io/quijokes
 A web app with a robot that tells random tacky jokes.
 
 The jokes are grabbed by using a joke api.
