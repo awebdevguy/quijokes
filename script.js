@@ -47,25 +47,29 @@ function tellMe(jokeSetup, jokeDelivery) {
   window.speechSynthesis.speak(utterance);
   textAreaJokeSetup.textContent = jokeSetup;
 
-  utterance.addEventListener("end", () => {
+  console.log("utterance: " + utterance);
+  if(utterance) {
+    utterance.addEventListener("end", () => {
 
-    // check if there is second part to joke
-    if(jokeDelivery) {
-        utterance = new SpeechSynthesisUtterance(jokeDelivery);
-        setTimeout(() => {
-            window.speechSynthesis.speak(utterance);
-            textAreaJokeDelivery.textContent = jokeDelivery;
+        // check if there is second part to joke
+        if(jokeDelivery) {
+            utterance = new SpeechSynthesisUtterance(jokeDelivery);
+            setTimeout(() => {
+                window.speechSynthesis.speak(utterance);
+                textAreaJokeDelivery.textContent = jokeDelivery;
+                disableButton(false);
+            }, 1500);
+        } else {
             disableButton(false);
-        }, 1500);
-    } else {
-        disableButton(false);
+        }
+      });
+  } else {
+        // tablets and phones with no voice, use this
+        setTimeout(() => {
+            disableButton(false);
+        }, 3000);
     }
-  });
 
-  // tablets and phones with no voice, use this
-  setInterval(() => {
-    disableButton(false);
-  }, 3000);
 
 }
 
