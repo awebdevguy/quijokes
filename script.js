@@ -41,36 +41,42 @@ function loadVoices() {
 // Selected User
 function tellMe(jokeSetup, jokeDelivery) {
 
-  let utterance = new SpeechSynthesisUtterance(jokeSetup);
-  
-  utterance.voice = selectVoices[selector.selectedIndex];
-  window.speechSynthesis.speak(utterance);
-  textAreaJokeSetup.textContent = jokeSetup;
+    let utterance = new SpeechSynthesisUtterance(jokeSetup);
+    
+    utterance.voice = selectVoices[selector.selectedIndex];
+    window.speechSynthesis.speak(utterance);
+    textAreaJokeSetup.textContent = jokeSetup;
 
-  console.log("utterance: " + utterance);
-  if(utterance) {
-    utterance.addEventListener("end", () => {
+    // utterance.addEventListener("end", () => {
+    //     // check if there is second part to joke
+    //     if(jokeDelivery) {
+    //         utterance = new SpeechSynthesisUtterance(jokeDelivery);
+    //         setTimeout(() => {
+    //             window.speechSynthesis.speak(utterance);
+    //             textAreaJokeDelivery.textContent = jokeDelivery;
+    //             disableButton(false);
+    //         }, 1500);
+    //     } else {
+    //         disableButton(false);
+    //     }
+    // });
 
-        // check if there is second part to joke
-        if(jokeDelivery) {
-            utterance = new SpeechSynthesisUtterance(jokeDelivery);
-            setTimeout(() => {
-                window.speechSynthesis.speak(utterance);
-                textAreaJokeDelivery.textContent = jokeDelivery;
-                disableButton(false);
-            }, 1500);
-        } else {
-            disableButton(false);
-        }
-      });
-  } else {
-        // tablets and phones with no voice, use this
+    // check if there is second part to joke
+    if(jokeDelivery) {
+        utterance = new SpeechSynthesisUtterance(jokeDelivery);
         setTimeout(() => {
+            window.speechSynthesis.speak(utterance);
+            textAreaJokeDelivery.textContent = jokeDelivery;
             disableButton(false);
-        }, 3000);
+        }, 1500);
+    } else {
+        disableButton(false);
     }
 
-
+    // tablets and phones with no voice, use this
+    // setTimeout(() => {
+    //     disableButton(false);
+    // }, 5000);
 }
 
 // get jokes from jokes api
