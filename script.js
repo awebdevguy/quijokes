@@ -61,6 +61,12 @@ function tellMe(jokeSetup, jokeDelivery) {
         disableButton(false);
     }
   });
+
+  // tablets and phones with no voice, use this
+  setInterval(() => {
+    disableButton(false);
+  }, 3000);
+
 }
 
 // get jokes from jokes api
