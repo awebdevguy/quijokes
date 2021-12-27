@@ -1,13 +1,24 @@
 const button = document.getElementById("button");
 const proxyURL = "https://quicors.herokuapp.com/";
 // Joke api, this one uses setup: && delivery: else just joke:
-// const url = "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,racist,sexist";
+// const url = proxyURL + "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,racist,sexist";
 // const url = "https://sv443.net/jokeapi/v2/joke/Any";
 
+// const url = proxyURL + "https://sv443.net/jokeapi/v2/joke/Any?safe-mode";
+const url = proxyURL + "https://icanhazdadjoke.com";
+
+const headers = {
+  headers: {
+  'Accept': 'application/json',
+  }
+};
+
 // Another joke api, uses setup: and punchline:
-const url = proxyURL + "https://official-joke-api.appspot.com/random_joke";
+// const url = proxyURL + "https://official-joke-api.appspot.com/random_joke";
+
 const selector = document.getElementById("select-voice");
-const textArea = document.getElementById("text-area");
+var textAreaJokeSetup = document.getElementById("text-area-joke-setup");
+var textAreaJokeDelivery = document.getElementById("text-area-joke-delivery");
 var voices = [];
 const selectVoices = [];
 
@@ -37,36 +48,69 @@ function loadVoices() {
 }
 
 // Selected User
-function tellMe(joke) {
-  const utterance = new SpeechSynthesisUtterance(joke);
-  utterance.voice = selectVoices[selector.selectedIndex];
-  window.speechSynthesis.speak(utterance);
-  textArea.textContent = joke;
-  utterance.addEventListener("end", e => {
-    disableButton(false);
-  });
-  // tablets and phones with no voice, use this
-  setInterval(() => {
-    disableButton(false);
-  }, 3000);
+function tellMe(jokeSetup, jokeDelivery) {
+
+    let utterance = new SpeechSynthesisUtterance(jokeSetup);
+    
+    utterance.voice = selectVoices[selector.selectedIndex];
+    window.speechSynthesis.speak(utterance);
+    textAreaJokeSetup.textContent = jokeSetup;
+
+    // utterance.addEventListener("end", () => {
+    //     // check if there is second part to joke
+    //     if(jokeDelivery) {
+    //         utterance = new SpeechSynthesisUtterance(jokeDelivery);
+    //         setTimeout(() => {
+    //             window.speechSynthesis.speak(utterance);
+    //             textAreaJokeDelivery.textContent = jokeDelivery;
+    //             disableButton(false);
+    //         }, 1500);
+    //     } else {
+    //         disableButton(false);
+    //     }
+    // });
+
+    // check if there is second part to joke
+    if(jokeDelivery) {
+        utterance = new SpeechSynthesisUtterance(jokeDelivery);
+        setTimeout(() => {
+            window.speechSynthesis.speak(utterance);
+            textAreaJokeDelivery.textContent = jokeDelivery;
+            disableButton(false);
+        }, 1500);
+    } else {
+        disableButton(false);
+    }
+
+    // tablets and phones with no voice, use this
+    // setTimeout(() => {
+    //     disableButton(false);
+    // }, 5000);
 }
 
 // get jokes from jokes api
 async function getJokes() {
-  let joke = "";
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    if (data.setup) {
-      // for const url = "https://official-joke-api.appspot.com/random_joke";
-      joke = `${data.setup} ... ${data.punchline}`;
 
-      // for const url = "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,racist,sexist";
-      // joke = `${data.setup} ... ${data.delivery}`;
+  let jokeSetup = "";
+  let jokeDelivery = "";
+  textAreaJokeSetup.textContent = "";
+  textAreaJokeDelivery.textContent = "";
+
+  try {
+    const response = await fetch(url, headers);
+    const data = await response.json();
+    console.log(data);
+
+    if (data.setup) {
+        // two part joke
+        jokeSetup = data.setup;
+        jokeDelivery = data.delivery;
     } else {
-      joke = data.joke;
+        // single part joke
+        jokeSetup = data.joke;
     }
-    tellMe(joke);
+    
+    tellMe(jokeSetup, jokeDelivery);
   } catch (e) {
     console.log("getJokes error: " + e);
   }
