@@ -3,10 +3,19 @@ const proxyURL = "https://quicors.herokuapp.com/";
 // Joke api, this one uses setup: && delivery: else just joke:
 // const url = proxyURL + "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,racist,sexist";
 // const url = "https://sv443.net/jokeapi/v2/joke/Any";
-const url = proxyURL + "https://sv443.net/jokeapi/v2/joke/Any?safe-mode";
+
+// const url = proxyURL + "https://sv443.net/jokeapi/v2/joke/Any?safe-mode";
+const url = proxyURL + "https://icanhazdadjoke.com";
+
+const headers = {
+  headers: {
+  'Accept': 'application/json',
+  }
+};
 
 // Another joke api, uses setup: and punchline:
 // const url = proxyURL + "https://official-joke-api.appspot.com/random_joke";
+
 const selector = document.getElementById("select-voice");
 var textAreaJokeSetup = document.getElementById("text-area-joke-setup");
 var textAreaJokeDelivery = document.getElementById("text-area-joke-delivery");
@@ -88,7 +97,7 @@ async function getJokes() {
   textAreaJokeDelivery.textContent = "";
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, headers);
     const data = await response.json();
     console.log(data);
 
