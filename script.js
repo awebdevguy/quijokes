@@ -4,8 +4,8 @@ const proxyURL = "https://quicors.herokuapp.com/";
 // const url = proxyURL + "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,racist,sexist";
 // const url = "https://sv443.net/jokeapi/v2/joke/Any";
 
-// const url = proxyURL + "https://sv443.net/jokeapi/v2/joke/Any?safe-mode";
-const url = proxyURL + "https://icanhazdadjoke.com";
+const url = proxyURL + "https://sv443.net/jokeapi/v2/joke/Any?safe-mode";
+// const url = proxyURL + "https://icanhazdadjoke.com";
 
 const headers = {
   headers: {
