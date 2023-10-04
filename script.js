@@ -25,8 +25,8 @@ const selectVoices = [];
 loadVoices();
 
 // // Timeout needed to retrieve voices
-function loadVoices() {
-  voices = window.speechSynthesis.getVoices();
+async function loadVoices() {
+  voices = await window.speechSynthesis.getVoices();
 
   if (voices.length !== 0) {
     voices.forEach(voice => {
