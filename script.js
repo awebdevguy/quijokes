@@ -1,5 +1,5 @@
 const button = document.getElementById("button");
-const proxyURL = "https://quicors.herokuapp.com/";
+const proxyURL = "https://corsproxy.io/?";
 // Joke api, this one uses setup: && delivery: else just joke:
 // const url = proxyURL + "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,racist,sexist";
 // const url = "https://sv443.net/jokeapi/v2/joke/Any";
